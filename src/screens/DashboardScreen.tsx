@@ -25,7 +25,7 @@ export default function DashboardScreen({ transactions, fruits, onAddSale }: Das
 
   return (
     <>
-      <Header title="FruityVens" subtitle={dateLabel} />
+      <Header title="FruityVens" subtitle={dateLabel} logo={require('../../assets/logo.png')} />
       <ScrollView
         className="flex-1 px-4 pt-5"
         showsVerticalScrollIndicator={false}
