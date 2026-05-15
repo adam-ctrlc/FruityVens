@@ -6,16 +6,30 @@
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "format": "prettier --write \"src/**/*.{ts,tsx}\" \"*.{ts,tsx,js}\"",
+    "format:check": "prettier --check \"src/**/*.{ts,tsx}\" \"*.{ts,tsx,js}\""
   },
   "dependencies": {
+    "@types/jpeg-js": "^0.3.7",
     "expo": "~54.0.33",
+    "expo-camera": "~17.0.10",
+    "expo-image-manipulator": "~14.0.8",
     "expo-status-bar": "~3.0.9",
+    "jpeg-js": "^0.4.4",
+    "nativewind": "^4.2.3",
+    "onnxruntime-react-native": "^1.24.3",
     "react": "19.1.0",
-    "react-native": "0.81.5"
+    "react-native": "0.81.5",
+    "react-native-reanimated": "^4.3.1",
+    "react-native-safe-area-context": "^5.7.0",
+    "react-native-svg": "^15.15.5",
+    "tailwindcss": "^4.3.0"
   },
   "devDependencies": {
     "@types/react": "~19.1.0",
+    "prettier": "^3.8.3",
+    "react-native-svg-transformer": "^1.5.3",
     "typescript": "~5.9.2"
   },
   "private": true

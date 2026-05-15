@@ -25,6 +25,18 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "plugins": [
+      "onnxruntime-react-native",
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "FruityVens uses the camera to identify fruits for quick sale entry."
+        }
+      ]
+    ],
+    "assetBundlePatterns": [
+      "assets/models/*"
+    ]
   }
 }
