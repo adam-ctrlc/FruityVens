@@ -22,8 +22,8 @@ export default function Header({ title, subtitle, right, logo }: HeaderProps) {
           {logo ? (
             <Image
               source={logo}
-              style={{ height: 32, width: 108 }}
-              resizeMode="stretch"
+              style={{ height: 36, width: 120 }}
+              resizeMode="contain"
             />
           ) : (
             <ThemedText size="xl" weight="bold" style={{ color: '#1e293b' }}>{title}</ThemedText>
