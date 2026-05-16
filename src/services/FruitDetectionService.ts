@@ -1,4 +1,3 @@
-import { InferenceSession, Tensor } from 'onnxruntime-react-native';
 import { manipulateAsync, SaveFormat } from 'expo-image-manipulator';
 import jpeg from 'jpeg-js';
 import { FruitDetection, FruitDetectionResult, FruitDetectionError } from '@/types/detection';
@@ -24,14 +23,36 @@ export interface DetectionOptions {
   maxDetections?: number;
 }
 
-let _session: InferenceSession | null = null;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+let _session: any | null = null;
 
-async function getSession(): Promise<InferenceSession> {
+/** Synchronous check — false in Expo Go (stub returns null InferenceSession). */
+export function isDetectionAvailable(): boolean {
+  try {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const ort = require('onnxruntime-react-native');
+    return !!ort?.InferenceSession;
+  } catch {
+    return false;
+  }
+}
+
+async function getSession(): Promise<any> {
   if (_session) return _session;
-  // eslint-disable-next-line @typescript-eslint/no-require-imports
-  const modelAsset = require('../../assets/models/best_int8.onnx');
-  _session = await InferenceSession.create(modelAsset);
-  return _session;
+  try {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const ort = require('onnxruntime-react-native');
+    if (!ort?.InferenceSession) {
+      throw new FruitDetectionError('AI detection requires a dev build — not available in Expo Go.');
+    }
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const modelAsset = require('../../assets/models/best_int8.onnx');
+    _session = await ort.InferenceSession.create(modelAsset);
+    return _session;
+  } catch (err) {
+    if (err instanceof FruitDetectionError) throw err;
+    throw new FruitDetectionError('AI detection requires a dev build — not available in Expo Go.');
+  }
 }
 
 function base64ToUint8Array(base64: string): Uint8Array {
@@ -198,8 +219,13 @@ export async function detectFruitsFromUri(
 
   // Step 4: run ONNX inference
   const session = await getSession();
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  const ort = require('onnxruntime-react-native');
+  if (!ort?.Tensor) throw new FruitDetectionError('AI detection requires a dev build — not available in Expo Go.');
+  const Tensor = ort.Tensor;
   const inputTensor = new Tensor('float32', inputData, [1, 3, MODEL_INPUT_SIZE, MODEL_INPUT_SIZE]);
-  const feeds: Record<string, Tensor> = { [session.inputNames[0]]: inputTensor };
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const feeds: Record<string, any> = { [session.inputNames[0]]: inputTensor };
   const results = await session.run(feeds);
   const outputTensor = results[session.outputNames[0]];
   const rawOutput = Array.from(outputTensor.data as Float32Array);

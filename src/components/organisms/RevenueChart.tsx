@@ -39,7 +39,7 @@ export default function RevenueChart({ transactions, fruits }: RevenueChartProps
   const maxRevenue = stats[0]?.totalRevenue ?? 1;
 
   return (
-    <View className="bg-white border border-green-100 rounded-2xl p-4 mb-4">
+    <View className="bg-white border border-slate-100 rounded-2xl p-4 mb-4">
       <ThemedText size="base" weight="bold" className="mb-4">Revenue by Fruit</ThemedText>
       {stats.length === 0 ? (
         <ThemedText variant="muted" size="sm">No sales recorded yet.</ThemedText>
@@ -53,7 +53,7 @@ export default function RevenueChart({ transactions, fruits }: RevenueChartProps
               label={s.fruitName}
               value={s.totalRevenue}
               maxValue={maxRevenue}
-              displayValue={`$${s.totalRevenue.toFixed(0)}`}
+              displayValue={`₱${s.totalRevenue.toFixed(0)}`}
               marginLabel={`${margin}%`}
             />
           );

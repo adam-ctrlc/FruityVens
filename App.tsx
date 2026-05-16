@@ -9,14 +9,14 @@ import {
   AddSaleModal, FruitDetailModal, RestockModal, EditFruitModal, CameraDetectModal,
 } from '@/components/organisms';
 import {
-  DashboardScreen, InventoryScreen, HistoryScreen, AnalyticsScreen,
+  ScanScreen, InventoryScreen, HistoryScreen, AnalyticsScreen,
 } from '@/screens';
 
 import { fruits as seedFruits, transactions as seedTransactions, restockEvents as seedRestocks } from '@/data/mockData';
 import { Screen, Fruit, Transaction, RestockEvent } from '@/types';
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState<Screen>('dashboard');
+  const [activeTab, setActiveTab] = useState<Screen>('scan');
 
   const [fruits, setFruits] = useState<Fruit[]>(seedFruits);
   const [transactions, setTransactions] = useState<Transaction[]>(seedTransactions);
@@ -111,12 +111,13 @@ export default function App() {
 
   const renderScreen = () => {
     switch (activeTab) {
-      case 'dashboard':
+      case 'scan':
         return (
-          <DashboardScreen
-            transactions={transactions}
+          <ScanScreen
             fruits={fruits}
-            onAddSale={openAddSale}
+            transactions={transactions}
+            onScan={openCamera}
+            onViewHistory={() => setActiveTab('history')}
           />
         );
       case 'inventory':
@@ -139,7 +140,7 @@ export default function App() {
 
   return (
     <SafeAreaProvider>
-      <StatusBar style="light" />
+      <StatusBar style="dark" />
       <MainLayout activeTab={activeTab} onTabPress={setActiveTab} lowStockCount={lowStockCount}>
         {renderScreen()}
       </MainLayout>

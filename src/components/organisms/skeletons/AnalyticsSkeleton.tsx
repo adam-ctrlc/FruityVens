@@ -5,7 +5,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 function StatSkeleton() {
   return (
-    <View className="bg-white border border-green-100 rounded-2xl p-4 flex-1" style={{ gap: 8 }}>
+    <View className="bg-white border border-slate-100 rounded-2xl p-4 flex-1" style={{ gap: 8 }}>
       <Skeleton width={32} height={32} radius={16} />
       <Skeleton width="55%" height={22} radius={6} />
       <Skeleton width="75%" height={12} radius={4} />
@@ -16,8 +16,8 @@ function StatSkeleton() {
 export default function AnalyticsSkeleton() {
   const insets = useSafeAreaInsets();
   return (
-    <View className="flex-1 bg-green-50">
-      <View className="bg-green-600 px-5 pb-5" style={{ paddingTop: insets.top + 12, gap: 8 }}>
+    <View className="flex-1 bg-slate-50">
+      <View className="bg-white border-b border-slate-100 px-5 pb-4" style={{ paddingTop: insets.top + 12, gap: 8 }}>
         <Skeleton width={120} height={28} radius={6} />
         <Skeleton width={110} height={14} radius={4} />
       </View>
@@ -32,7 +32,7 @@ export default function AnalyticsSkeleton() {
           <StatSkeleton />
         </View>
         {/* Revenue chart */}
-        <View className="bg-white border border-green-100 rounded-2xl p-4 mb-4" style={{ gap: 12 }}>
+        <View className="bg-white border border-slate-100 rounded-2xl p-4 mb-4" style={{ gap: 12 }}>
           <Skeleton width={140} height={18} radius={5} />
           {[80, 55, 100, 40, 70, 30, 90, 50].map((w, i) => (
             <View key={i} className="flex-row items-center" style={{ gap: 8 }}>
@@ -44,7 +44,7 @@ export default function AnalyticsSkeleton() {
           ))}
         </View>
         {/* Weekly trend */}
-        <View className="bg-white border border-green-100 rounded-2xl p-4 mb-4">
+        <View className="bg-white border border-slate-100 rounded-2xl p-4 mb-4">
           <Skeleton width={120} height={18} radius={5} />
           <View className="flex-row items-end mt-4" style={{ gap: 4 }}>
             {[40, 60, 30, 80, 50, 70, 100].map((h, i) => (

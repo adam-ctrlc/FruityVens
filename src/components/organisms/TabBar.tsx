@@ -15,10 +15,10 @@ interface Tab {
 }
 
 const tabs: Tab[] = [
-  { key: 'dashboard',  label: 'Dashboard', icon: 'grid-outline',        iconActive: 'grid' },
-  { key: 'inventory',  label: 'Inventory',  icon: 'cube-outline',        iconActive: 'cube' },
-  { key: 'history',    label: 'History',    icon: 'time-outline',        iconActive: 'time' },
-  { key: 'analytics',  label: 'Analytics',  icon: 'stats-chart-outline', iconActive: 'stats-chart' },
+  { key: 'scan',      label: 'Scan',     icon: 'scan-outline',        iconActive: 'scan' },
+  { key: 'inventory', label: 'Stock',    icon: 'cube-outline',        iconActive: 'cube' },
+  { key: 'history',   label: 'Logs',     icon: 'time-outline',        iconActive: 'time' },
+  { key: 'analytics', label: 'Stats',    icon: 'stats-chart-outline', iconActive: 'stats-chart' },
 ];
 
 interface TabBarProps {
@@ -31,30 +31,77 @@ export default function TabBar({ activeTab, onTabPress, lowStockCount = 0 }: Tab
   const insets = useSafeAreaInsets();
   return (
     <View
-      className="flex-row bg-white border-t border-green-100"
+      className="flex-row bg-white border-t border-slate-100"
       style={{ paddingBottom: insets.bottom || 8 }}
     >
       {tabs.map(tab => {
         const isActive = activeTab === tab.key;
+        const isScan = tab.key === 'scan';
+
+        if (isScan) {
+          // Scan tab: elevated pill-style indicator
+          return (
+            <TouchableOpacity
+              key={tab.key}
+              onPress={() => onTabPress(tab.key)}
+              className="flex-1 items-center pt-2 pb-1"
+              activeOpacity={0.7}
+              accessibilityRole="button"
+              accessibilityState={{ selected: isActive }}
+              accessibilityLabel="Scan tab"
+            >
+              <View
+                style={{
+                  width: 52,
+                  height: 32,
+                  borderRadius: 16,
+                  backgroundColor: isActive ? '#16a34a' : '#f1f5f9',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                <Ionicons
+                  name={isActive ? tab.iconActive : tab.icon}
+                  size={20}
+                  color={isActive ? 'white' : '#94a3b8'}
+                />
+              </View>
+              <ThemedText
+                size="xs"
+                weight={isActive ? 'semibold' : 'normal'}
+                style={{ color: isActive ? '#16a34a' : '#94a3b8', marginTop: 2 }}
+              >
+                {tab.label}
+              </ThemedText>
+            </TouchableOpacity>
+          );
+        }
+
         return (
           <TouchableOpacity
             key={tab.key}
             onPress={() => onTabPress(tab.key)}
-            className="flex-1 items-center pt-3 pb-1"
+            className="flex-1 items-center pt-2 pb-1"
             activeOpacity={0.7}
+            accessibilityRole="button"
+            accessibilityState={{ selected: isActive }}
+            accessibilityLabel={tab.label}
           >
-            <View>
+            <View
+              className={`w-12 h-8 rounded-2xl items-center justify-center ${isActive ? 'bg-green-50' : ''}`}
+              style={{ position: 'relative' }}
+            >
               <Ionicons
                 name={isActive ? tab.iconActive : tab.icon}
                 size={22}
-                color={isActive ? '#16a34a' : '#9CA3AF'}
+                color={isActive ? '#16a34a' : '#94a3b8'}
               />
               {tab.key === 'inventory' && lowStockCount > 0 && (
                 <View
                   className="bg-red-500 rounded-full items-center justify-center"
-                  style={{ position: 'absolute', top: -4, right: -6, width: 16, height: 16 }}
+                  style={{ position: 'absolute', top: -2, right: 4, width: 15, height: 15 }}
                 >
-                  <ThemedText size="xs" variant="inverse" style={{ fontSize: 10, lineHeight: 12 }}>
+                  <ThemedText size="xs" variant="inverse" style={{ fontSize: 9, lineHeight: 11 }}>
                     {lowStockCount > 9 ? '9+' : lowStockCount}
                   </ThemedText>
                 </View>
@@ -63,12 +110,10 @@ export default function TabBar({ activeTab, onTabPress, lowStockCount = 0 }: Tab
             <ThemedText
               size="xs"
               weight={isActive ? 'semibold' : 'normal'}
-              variant={isActive ? 'primary' : 'muted'}
-              className="mt-0.5"
+              style={{ color: isActive ? '#16a34a' : '#94a3b8', marginTop: 2 }}
             >
               {tab.label}
             </ThemedText>
-            {isActive && <View className="w-1 h-1 rounded-full bg-green-600 mt-1" />}
           </TouchableOpacity>
         );
       })}

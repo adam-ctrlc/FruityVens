@@ -35,7 +35,6 @@ function FruitGrid({ fruits, onFruitPress, onFruitEdit }: FruitGridProps) {
         <FlatList
           data={filtered}
           keyExtractor={item => item.id}
-          numColumns={2}
           renderItem={renderItem}
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{ paddingBottom: 24 }}

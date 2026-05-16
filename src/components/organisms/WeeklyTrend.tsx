@@ -35,7 +35,7 @@ export default function WeeklyTrend({ transactions }: WeeklyTrendProps) {
   const maxRevenue = Math.max(...bars.map(b => b.revenue), 1);
 
   return (
-    <View className="bg-white border border-green-100 rounded-2xl p-4 mb-4">
+    <View className="bg-white border border-slate-100 rounded-2xl p-4 mb-4">
       <ThemedText size="base" weight="bold" className="mb-4">Weekly Revenue</ThemedText>
       <View className="flex-row items-end" style={{ gap: 4 }}>
         {bars.map(b => (

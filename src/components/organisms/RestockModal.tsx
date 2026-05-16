@@ -53,7 +53,7 @@ export default function RestockModal({ visible, fruits, onConfirm, onClose }: Re
         className="flex-1 justify-end"
       >
         <View className="bg-white rounded-t-3xl" style={{ maxHeight: '85%' }}>
-          <View className="flex-row items-center justify-between px-5 pt-5 pb-3 border-b border-green-100">
+          <View className="flex-row items-center justify-between px-5 pt-5 pb-3 border-b border-slate-100">
             <ThemedText size="xl" weight="bold">
               {step === 1 ? 'Restock Fruit' : `Restock ${selectedFruit?.name}`}
             </ThemedText>
@@ -72,7 +72,7 @@ export default function RestockModal({ visible, fruits, onConfirm, onClose }: Re
                     setCostPerUnit(fruit.costPrice.toFixed(2));
                     setStep(2);
                   }}
-                  className="flex-row items-center py-3.5 border-b border-green-50"
+                  className="flex-row items-center py-3.5 border-b border-slate-50"
                   activeOpacity={0.7}
                 >
                   <View style={{ width: 44 }}>
@@ -82,7 +82,7 @@ export default function RestockModal({ visible, fruits, onConfirm, onClose }: Re
                     <ThemedText size="sm" weight="semibold">{fruit.name}</ThemedText>
                     <ThemedText size="xs" variant="muted">Current: {fruit.stock} {fruit.unit}</ThemedText>
                   </View>
-                  <ThemedText size="xs" variant="muted">Cost: ${fruit.costPrice}/{fruit.unit}</ThemedText>
+                  <ThemedText size="xs" variant="muted">Cost: ₱{fruit.costPrice}/{fruit.unit}</ThemedText>
                 </TouchableOpacity>
               ))}
               <View style={{ height: 32 }} />
@@ -105,7 +105,7 @@ export default function RestockModal({ visible, fruits, onConfirm, onClose }: Re
               />
 
               <ThemedText size="sm" weight="medium" className="mb-1.5">
-                Cost per {selectedFruit?.unit} ($)
+                Cost per {selectedFruit?.unit} (₱)
               </ThemedText>
               <Input
                 value={costPerUnit}
@@ -118,7 +118,7 @@ export default function RestockModal({ visible, fruits, onConfirm, onClose }: Re
               {totalCost && (
                 <View className="bg-amber-50 border border-amber-200 rounded-xl p-4 mb-5 items-center">
                   <ThemedText size="sm" variant="muted">Total Cost</ThemedText>
-                  <ThemedText size="3xl" weight="bold">${totalCost}</ThemedText>
+                  <ThemedText size="3xl" weight="bold">₱{totalCost}</ThemedText>
                 </View>
               )}
 

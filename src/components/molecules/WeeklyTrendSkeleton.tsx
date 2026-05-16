@@ -11,7 +11,7 @@ const HEIGHTS = [40, 60, 30, 80, 50, 70, 100];
 
 export default function WeeklyTrendSkeleton({ title }: WeeklyTrendSkeletonProps) {
   return (
-    <View className="bg-white border border-green-100 rounded-2xl p-4" style={{ gap: 12 }}>
+    <View className="bg-white border border-slate-100 rounded-2xl p-4" style={{ gap: 12 }}>
       {title ? (
         <ThemedText size="base" weight="bold">{title}</ThemedText>
       ) : (

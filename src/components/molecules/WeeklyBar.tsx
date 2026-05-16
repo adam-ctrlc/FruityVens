@@ -16,7 +16,7 @@ export default function WeeklyBar({ day, revenue, maxRevenue, isToday }: WeeklyB
   return (
     <View className="items-center flex-1" style={{ gap: 4 }}>
       <ThemedText size="xs" weight={isToday ? 'semibold' : 'normal'} variant={isToday ? 'primary' : 'muted'}>
-        ${revenue.toFixed(0)}
+        ₱{revenue.toFixed(0)}
       </ThemedText>
       <View style={{ height: MAX_HEIGHT, justifyContent: 'flex-end' }}>
         <View

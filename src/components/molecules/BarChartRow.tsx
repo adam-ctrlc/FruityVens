@@ -17,7 +17,7 @@ function BarChartRow({ fruitId, label, value, maxValue, displayValue, marginLabe
     <View className="flex-row items-center mb-3" style={{ gap: 8 }}>
       <FruitAvatar fruitId={fruitId} size={28} />
       <ThemedText size="xs" style={{ width: 72 }} numberOfLines={1}>{label}</ThemedText>
-      <View className="flex-1 bg-green-100 rounded-full h-2.5">
+      <View className="flex-1 bg-slate-100 rounded-full h-2.5">
         <View className="bg-green-500 rounded-full h-2.5" style={{ width: `${Math.max(pct, 2)}%` }} />
       </View>
       <ThemedText size="xs" weight="semibold" style={{ width: 44, textAlign: 'right' }}>{displayValue}</ThemedText>

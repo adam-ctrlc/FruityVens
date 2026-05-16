@@ -46,7 +46,7 @@ export interface DaySection {
   data: Transaction[];
 }
 
-export type Screen = 'dashboard' | 'inventory' | 'history' | 'analytics';
+export type Screen = 'scan' | 'inventory' | 'history' | 'analytics';
 export type HistoryFilter = 'today' | 'week' | 'all';
 
 export type { FruitDetection, FruitDetectionResult, FruitDetectionError } from './detection';

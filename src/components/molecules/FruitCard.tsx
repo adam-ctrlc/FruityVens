@@ -10,42 +10,76 @@ interface FruitCardProps {
   onEdit?: (fruit: Fruit) => void;
 }
 
+const STOCK_MAX = 50;
+
 function stockStatus(stock: number): { label: string; variant: 'success' | 'warning' | 'danger' } {
   if (stock > 30) return { label: 'In Stock', variant: 'success' };
   if (stock > 10) return { label: 'Low Stock', variant: 'warning' };
   return { label: 'Critical', variant: 'danger' };
 }
 
+const BAR_COLOR: Record<'success' | 'warning' | 'danger', string> = {
+  success: '#16a34a',
+  warning: '#f59e0b',
+  danger: '#ef4444',
+};
+
 function FruitCard({ fruit, onPress, onEdit }: FruitCardProps) {
   const status = stockStatus(fruit.stock);
   const margin = Math.round(((fruit.price - fruit.costPrice) / fruit.price) * 100);
+  const stockPct = Math.min(Math.max(fruit.stock / STOCK_MAX, 0), 1);
+  const barColor = BAR_COLOR[status.variant];
+
   return (
     <TouchableOpacity
       onPress={() => onPress?.(fruit)}
-      className="bg-white border border-green-100 rounded-2xl p-4 m-1.5 flex-1"
+      className="bg-white border border-slate-100 rounded-2xl px-4 py-3.5 mb-2"
       activeOpacity={0.7}
     >
-      {onEdit && (
-        <TouchableOpacity
-          onPress={() => onEdit(fruit)}
-          className="absolute top-2 right-2 w-7 h-7 items-center justify-center"
-          hitSlop={{ top: 8, right: 8, bottom: 8, left: 8 }}
-        >
-          <Ionicons name="create-outline" size={16} color="#6B7280" />
-        </TouchableOpacity>
-      )}
-      <View className="items-center">
-        <FruitAvatar fruitId={fruit.id} size={48} />
-      </View>
-      <ThemedText size="sm" weight="semibold" className="mt-2 text-center">{fruit.name}</ThemedText>
-      <ThemedText size="base" weight="bold" variant="primary" className="text-center mt-0.5">
-        ${fruit.price.toFixed(2)}/{fruit.unit}
-      </ThemedText>
-      <ThemedText size="xs" variant="muted" className="text-center">
-        {fruit.stock} {fruit.unit} · {margin}% margin
-      </ThemedText>
-      <View className="mt-2 items-center">
-        <Badge label={status.label} variant={status.variant} />
+      <View className="flex-row items-center" style={{ gap: 14 }}>
+        <FruitAvatar fruitId={fruit.id} size={52} />
+
+        <View style={{ flex: 1 }}>
+          {/* Top row: name + badge + edit */}
+          <View className="flex-row items-center justify-between mb-1">
+            <ThemedText size="base" weight="semibold" style={{ color: '#1e293b' }}>
+              {fruit.name}
+            </ThemedText>
+            <View className="flex-row items-center" style={{ gap: 8 }}>
+              <Badge label={status.label} variant={status.variant} />
+              {onEdit && (
+                <TouchableOpacity
+                  onPress={() => onEdit(fruit)}
+                  hitSlop={{ top: 8, right: 8, bottom: 8, left: 8 }}
+                >
+                  <Ionicons name="create-outline" size={16} color="#94a3b8" />
+                </TouchableOpacity>
+              )}
+            </View>
+          </View>
+
+          {/* Mid row: price + stock qty + margin */}
+          <View className="flex-row items-center justify-between mb-2">
+            <ThemedText size="sm" weight="bold" style={{ color: '#16a34a' }}>
+              ₱{fruit.price.toFixed(2)}/{fruit.unit}
+            </ThemedText>
+            <ThemedText size="xs" style={{ color: '#94a3b8' }}>
+              {fruit.stock} {fruit.unit} · {margin}% margin
+            </ThemedText>
+          </View>
+
+          {/* Stock progress bar */}
+          <View style={{ height: 5, borderRadius: 3, backgroundColor: '#f1f5f9' }}>
+            <View
+              style={{
+                height: 5,
+                borderRadius: 3,
+                backgroundColor: barColor,
+                width: `${Math.round(stockPct * 100)}%`,
+              }}
+            />
+          </View>
+        </View>
       </View>
     </TouchableOpacity>
   );

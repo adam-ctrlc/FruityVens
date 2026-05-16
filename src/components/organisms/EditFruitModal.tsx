@@ -47,7 +47,7 @@ export default function EditFruitModal({ visible, fruit, onConfirm, onClose }: E
         className="flex-1 justify-end"
       >
         <View className="bg-white rounded-t-3xl px-5 pt-5 pb-8">
-          <View className="flex-row items-center justify-between mb-4 border-b border-green-100 pb-3">
+          <View className="flex-row items-center justify-between mb-4 border-b border-slate-100 pb-3">
             <ThemedText size="xl" weight="bold">Edit {fruit.name}</ThemedText>
             <TouchableOpacity onPress={onClose} hitSlop={{ top: 8, right: 8, bottom: 8, left: 8 }}>
               <Ionicons name="close" size={22} color="#9ca3af" />
@@ -58,7 +58,7 @@ export default function EditFruitModal({ visible, fruit, onConfirm, onClose }: E
             <FruitAvatar fruitId={fruit.id} size={72} />
           </View>
 
-          <ThemedText size="sm" weight="medium" className="mb-1.5">Selling Price ($ per {fruit.unit})</ThemedText>
+          <ThemedText size="sm" weight="medium" className="mb-1.5">Selling Price (₱ per {fruit.unit})</ThemedText>
           <Input
             value={price}
             onChangeText={setPrice}
@@ -67,7 +67,7 @@ export default function EditFruitModal({ visible, fruit, onConfirm, onClose }: E
             className="mb-3"
           />
 
-          <ThemedText size="sm" weight="medium" className="mb-1.5">Cost Price ($ per {fruit.unit})</ThemedText>
+          <ThemedText size="sm" weight="medium" className="mb-1.5">Cost Price (₱ per {fruit.unit})</ThemedText>
           <Input
             value={costPrice}
             onChangeText={setCostPrice}
@@ -81,7 +81,7 @@ export default function EditFruitModal({ visible, fruit, onConfirm, onClose }: E
           )}
 
           {margin !== null && (
-            <View className="bg-green-50 border border-green-100 rounded-xl p-3 mb-4 flex-row items-center justify-between">
+            <View className="bg-slate-50 border border-slate-100 rounded-xl p-3 mb-4 flex-row items-center justify-between">
               <ThemedText size="sm" variant="muted">Profit Margin</ThemedText>
               <ThemedText size="base" weight="bold" variant="primary">{margin}%</ThemedText>
             </View>

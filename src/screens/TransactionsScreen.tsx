@@ -12,7 +12,7 @@ export default function TransactionsScreen() {
 
   return (
     <>
-      <Header title="Transactions" subtitle={`$${totalRevenue.toFixed(2)} earned today`} />
+      <Header title="Transactions" subtitle={`₱${totalRevenue.toFixed(2)} earned today`} />
       <View className="flex-1 px-4 pt-4">
         <FlatList
           data={sorted}

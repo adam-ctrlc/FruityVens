@@ -15,7 +15,7 @@ interface StatCardProps {
 
 function StatCard({ label, value, icon, trend, trendUp }: StatCardProps) {
   return (
-    <View className="bg-white border border-green-100 rounded-2xl p-4 flex-1">
+    <View className="bg-white border border-slate-100 rounded-2xl p-4 flex-1">
       <Ionicons name={icon} size={26} color="#16a34a" />
       <ThemedText size="2xl" weight="bold" className="mt-2">{value}</ThemedText>
       <ThemedText size="xs" variant="muted" className="mt-0.5">{label}</ThemedText>

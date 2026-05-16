@@ -8,7 +8,7 @@ interface TransactionRowSkeletonProps {
 
 function Row() {
   return (
-    <View className="bg-white border border-green-50 rounded-xl px-4 py-3 flex-row items-center justify-between mb-2">
+    <View className="bg-white border border-slate-100 rounded-xl px-4 py-3 flex-row items-center justify-between mb-2">
       <View className="flex-row items-center" style={{ gap: 12 }}>
         <Skeleton width={40} height={40} radius={20} />
         <View style={{ gap: 6 }}>

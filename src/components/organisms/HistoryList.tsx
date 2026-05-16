@@ -2,7 +2,7 @@ import React, { useMemo, useState, useCallback } from 'react';
 import { SectionList, View, SectionListRenderItem } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { ThemedText } from '@/components/atoms';
-import { TransactionItem, DaySectionHeader, FilterToggle } from '@/components/molecules';
+import { TransactionItem, DaySectionHeader, FilterToggle, SearchBar } from '@/components/molecules';
 import { Transaction, DaySection, HistoryFilter, Fruit } from '@/types';
 
 interface HistoryListProps {
@@ -28,18 +28,23 @@ function toDisplayDate(key: string): string {
 
 export default function HistoryList({ transactions, fruits }: HistoryListProps) {
   const [filter, setFilter] = useState<HistoryFilter>('today');
+  const [search, setSearch] = useState('');
 
   const sections = useMemo<DaySection[]>(() => {
     const today = toDateKey(new Date());
     const weekAgo = new Date();
     weekAgo.setDate(weekAgo.getDate() - 6);
     const weekAgoKey = toDateKey(weekAgo);
+    const q = search.toLowerCase().trim();
 
     const filtered = transactions.filter(t => {
       const key = toDateKey(t.timestamp);
-      if (filter === 'today') return key === today;
-      if (filter === 'week') return key >= weekAgoKey;
-      return true;
+      const matchesFilter =
+        filter === 'today' ? key === today :
+        filter === 'week'  ? key >= weekAgoKey :
+        true;
+      const matchesSearch = q ? t.fruitName.toLowerCase().includes(q) : true;
+      return matchesFilter && matchesSearch;
     });
 
     const groups: Record<string, Transaction[]> = {};
@@ -61,7 +66,7 @@ export default function HistoryList({ transactions, fruits }: HistoryListProps) 
         }, 0);
         return { title: key, displayDate: toDisplayDate(key), dailyRevenue, dailyProfit, data };
       });
-  }, [transactions, fruits, filter]);
+  }, [transactions, fruits, filter, search]);
 
   const renderItem = useCallback<SectionListRenderItem<Transaction, DaySection>>(
     ({ item }) => <TransactionItem transaction={item} />,
@@ -81,11 +86,14 @@ export default function HistoryList({ transactions, fruits }: HistoryListProps) 
 
   return (
     <View className="flex-1">
+      <SearchBar value={search} onChangeText={setSearch} placeholder="Search by fruit..." />
       <FilterToggle options={FILTER_OPTIONS} selected={filter} onSelect={setFilter} />
       {sections.length === 0 ? (
         <View className="flex-1 items-center justify-center py-16">
           <Ionicons name="calendar-outline" size={48} color="#9ca3af" />
-          <ThemedText variant="muted" className="mt-2">No transactions found</ThemedText>
+          <ThemedText variant="muted" className="mt-2">
+            {search ? `No results for "${search}"` : 'No transactions found'}
+          </ThemedText>
         </View>
       ) : (
         <SectionList

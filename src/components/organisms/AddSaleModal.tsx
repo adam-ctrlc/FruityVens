@@ -55,7 +55,7 @@ export default function AddSaleModal({ visible, fruits, initialFruit, onConfirm,
         className="flex-1 justify-end"
       >
         <View className="bg-white rounded-t-3xl" style={{ maxHeight: '85%' }}>
-          <View className="flex-row items-center justify-between px-5 pt-5 pb-3 border-b border-green-100">
+          <View className="flex-row items-center justify-between px-5 pt-5 pb-3 border-b border-slate-100">
             <ThemedText size="xl" weight="bold">
               {step === 1 ? 'Select Fruit' : `Sell ${selectedFruit?.name}`}
             </ThemedText>
@@ -70,7 +70,7 @@ export default function AddSaleModal({ visible, fruits, initialFruit, onConfirm,
                 <TouchableOpacity
                   key={fruit.id}
                   onPress={() => { setSelectedFruit(fruit); setStep(2); }}
-                  className="flex-row items-center py-3.5 border-b border-green-50"
+                  className="flex-row items-center py-3.5 border-b border-slate-50"
                   activeOpacity={0.7}
                 >
                   <View style={{ width: 44 }}>
@@ -81,7 +81,7 @@ export default function AddSaleModal({ visible, fruits, initialFruit, onConfirm,
                     <ThemedText size="xs" variant="muted">{fruit.stock} {fruit.unit} available</ThemedText>
                   </View>
                   <ThemedText size="sm" weight="bold" variant="primary">
-                    ${fruit.price.toFixed(2)}/{fruit.unit}
+                    ₱{fruit.price.toFixed(2)}/{fruit.unit}
                   </ThemedText>
                 </TouchableOpacity>
               ))}
@@ -93,7 +93,7 @@ export default function AddSaleModal({ visible, fruits, initialFruit, onConfirm,
                 {selectedFruit && <FruitAvatar fruitId={selectedFruit.id} size={64} />}
                 <ThemedText size="lg" weight="bold" className="mt-3">{selectedFruit?.name}</ThemedText>
                 <ThemedText size="sm" variant="muted">
-                  ${selectedFruit?.price.toFixed(2)}/{selectedFruit?.unit} · {selectedFruit?.stock} {selectedFruit?.unit} available
+                  ₱{selectedFruit?.price.toFixed(2)}/{selectedFruit?.unit} · {selectedFruit?.stock} {selectedFruit?.unit} available
                 </ThemedText>
               </View>
               <ThemedText size="sm" weight="medium" className="mb-1.5">
@@ -107,9 +107,9 @@ export default function AddSaleModal({ visible, fruits, initialFruit, onConfirm,
                 className="mb-3"
               />
               {total && (
-                <View className="bg-green-50 border border-green-100 rounded-xl p-4 mb-5 items-center">
+                <View className="bg-slate-50 border border-slate-100 rounded-xl p-4 mb-5 items-center">
                   <ThemedText size="sm" variant="muted">Total</ThemedText>
-                  <ThemedText size="3xl" weight="bold" variant="primary">${total}</ThemedText>
+                  <ThemedText size="3xl" weight="bold" variant="primary">₱{total}</ThemedText>
                   {parseFloat(quantity) > (selectedFruit?.stock ?? 0) && (
                     <ThemedText size="xs" variant="danger" className="mt-1">Exceeds available stock</ThemedText>
                   )}

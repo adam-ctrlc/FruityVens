@@ -42,7 +42,7 @@ export default function FruitDetailModal({ visible, fruit, transactions, onClose
     <Modal visible={visible} animationType="slide" transparent onRequestClose={onClose}>
       <View className="flex-1 justify-end">
         <View className="bg-white rounded-t-3xl" style={{ maxHeight: '80%' }}>
-          <View className="flex-row items-center justify-between px-5 pt-5 pb-3 border-b border-green-100">
+          <View className="flex-row items-center justify-between px-5 pt-5 pb-3 border-b border-slate-100">
             <ThemedText size="xl" weight="bold">Fruit Details</ThemedText>
             <TouchableOpacity onPress={onClose} hitSlop={{ top: 8, right: 8, bottom: 8, left: 8 }}>
               <Ionicons name="close" size={22} color="#9ca3af" />
@@ -57,17 +57,17 @@ export default function FruitDetailModal({ visible, fruit, transactions, onClose
             </View>
 
             <View className="flex-row mb-4" style={{ gap: 12 }}>
-              <View className="flex-1 bg-green-50 rounded-xl p-3 items-center">
+              <View className="flex-1 bg-slate-50 rounded-xl p-3 items-center">
                 <ThemedText size="xs" variant="muted">Sell Price</ThemedText>
-                <ThemedText size="lg" weight="bold" variant="primary">${fruit.price.toFixed(2)}</ThemedText>
+                <ThemedText size="lg" weight="bold" variant="primary">₱{fruit.price.toFixed(2)}</ThemedText>
                 <ThemedText size="xs" variant="muted">per {fruit.unit}</ThemedText>
               </View>
               <View className="flex-1 bg-amber-50 rounded-xl p-3 items-center">
                 <ThemedText size="xs" variant="muted">Cost Price</ThemedText>
-                <ThemedText size="lg" weight="bold">${fruit.costPrice.toFixed(2)}</ThemedText>
+                <ThemedText size="lg" weight="bold">₱{fruit.costPrice.toFixed(2)}</ThemedText>
                 <ThemedText size="xs" variant="muted">per {fruit.unit}</ThemedText>
               </View>
-              <View className="flex-1 bg-green-50 rounded-xl p-3 items-center">
+              <View className="flex-1 bg-slate-50 rounded-xl p-3 items-center">
                 <ThemedText size="xs" variant="muted">Margin</ThemedText>
                 <ThemedText size="lg" weight="bold" variant="primary">{margin}%</ThemedText>
                 <ThemedText size="xs" variant="muted">profit</ThemedText>

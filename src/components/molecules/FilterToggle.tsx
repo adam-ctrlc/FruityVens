@@ -10,7 +10,7 @@ interface FilterToggleProps<T extends string> {
 
 export default function FilterToggle<T extends string>({ options, selected, onSelect }: FilterToggleProps<T>) {
   return (
-    <View className="flex-row bg-green-50 rounded-xl p-1 mb-4" style={{ gap: 4 }}>
+    <View className="flex-row bg-slate-100 rounded-xl p-1 mb-4" style={{ gap: 4 }}>
       {options.map(opt => (
         <TouchableOpacity
           key={opt.value}

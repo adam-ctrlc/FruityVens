@@ -1,3 +1,4 @@
+export { default as ScanZone } from './ScanZone';
 export { default as StatCard } from './StatCard';
 export { default as FruitCard } from './FruitCard';
 export { default as TransactionItem } from './TransactionItem';

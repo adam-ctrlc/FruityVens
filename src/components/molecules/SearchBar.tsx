@@ -10,7 +10,7 @@ interface SearchBarProps {
 
 export default function SearchBar({ value, onChangeText, placeholder = 'Search...' }: SearchBarProps) {
   return (
-    <View className="flex-row items-center bg-white border border-green-100 rounded-xl px-3 mb-4">
+    <View className="flex-row items-center bg-white border border-slate-100 rounded-xl px-3 mb-4">
       <Ionicons name="search-outline" size={18} color="#9ca3af" style={{ marginRight: 8 }} />
       <TextInput
         value={value}

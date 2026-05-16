@@ -5,7 +5,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 function RowSkeleton() {
   return (
-    <View className="bg-white border border-green-50 rounded-xl px-4 py-3 flex-row items-center justify-between mb-2">
+    <View className="bg-white border border-slate-100 rounded-xl px-4 py-3 flex-row items-center justify-between mb-2">
       <View className="flex-row items-center" style={{ gap: 12 }}>
         <Skeleton width={40} height={40} radius={20} />
         <View style={{ gap: 6 }}>
@@ -24,8 +24,8 @@ function RowSkeleton() {
 export default function HistorySkeleton() {
   const insets = useSafeAreaInsets();
   return (
-    <View className="flex-1 bg-green-50">
-      <View className="bg-green-600 px-5 pb-5" style={{ paddingTop: insets.top + 12, gap: 8 }}>
+    <View className="flex-1 bg-slate-50">
+      <View className="bg-white border-b border-slate-100 px-5 pb-4" style={{ paddingTop: insets.top + 12, gap: 8 }}>
         <Skeleton width={90} height={28} radius={6} />
         <Skeleton width={170} height={14} radius={4} />
       </View>

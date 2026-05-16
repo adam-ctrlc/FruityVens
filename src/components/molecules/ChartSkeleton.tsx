@@ -10,7 +10,7 @@ interface ChartSkeletonProps {
 
 export default function ChartSkeleton({ title, rows = 5 }: ChartSkeletonProps) {
   return (
-    <View className="bg-white border border-green-100 rounded-2xl p-4" style={{ gap: 12 }}>
+    <View className="bg-white border border-slate-100 rounded-2xl p-4" style={{ gap: 12 }}>
       {title ? (
         <ThemedText size="base" weight="bold">{title}</ThemedText>
       ) : (

@@ -14,22 +14,22 @@ export default function Header({ title, subtitle, right, logo }: HeaderProps) {
   const insets = useSafeAreaInsets();
   return (
     <View
-      className="bg-green-600 px-5 pb-5"
-      style={{ paddingTop: insets.top + 12 }}
+      className="bg-white border-b border-slate-100 px-5 pb-4"
+      style={{ paddingTop: insets.top + 14 }}
     >
       <View className="flex-row items-center justify-between">
         <View className="flex-1">
           {logo ? (
             <Image
               source={logo}
-              style={{ height: 40, width: 140 }}
-              resizeMode="contain"
+              style={{ height: 32, width: 108 }}
+              resizeMode="stretch"
             />
           ) : (
-            <ThemedText size="2xl" weight="bold" variant="inverse">{title}</ThemedText>
+            <ThemedText size="xl" weight="bold" style={{ color: '#1e293b' }}>{title}</ThemedText>
           )}
           {subtitle && (
-            <ThemedText size="sm" variant="inverse" className="opacity-80 mt-0.5">
+            <ThemedText size="sm" style={{ color: '#64748b', marginTop: 2 }}>
               {subtitle}
             </ThemedText>
           )}

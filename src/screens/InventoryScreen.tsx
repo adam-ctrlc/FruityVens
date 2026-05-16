@@ -3,6 +3,7 @@ import { View, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Header, FruitGrid } from '@/components/organisms';
 import InventorySkeleton from '@/components/organisms/skeletons/InventorySkeleton';
+import { ThemedText } from '@/components/atoms';
 import { Fruit } from '@/types';
 import { useFirstLoad } from '@/hooks/useFirstLoad';
 
@@ -32,9 +33,11 @@ export default function InventoryScreen({
     <>
       <Header
         title="Inventory"
-        subtitle={`${fruits.length} fruits · ${criticalCount > 0 ? `${criticalCount} critical` : 'all stocked'}`}
+        subtitle={`${fruits.length} items · ${criticalCount > 0 ? `${criticalCount} critical` : 'all stocked'}`}
       />
-      <View className="flex-1 px-4 pt-4" style={{ paddingBottom: 80 }}>
+
+      {/* Fruit grid — extra bottom padding for FABs */}
+      <View className="flex-1 px-4 pt-4" style={{ paddingBottom: 144 }}>
         <FruitGrid
           fruits={fruits}
           onFruitPress={onFruitPress}
@@ -42,31 +45,78 @@ export default function InventoryScreen({
         />
       </View>
 
-      <TouchableOpacity
-        onPress={onAddSale}
-        className="bg-green-600 rounded-full items-center justify-center"
-        style={{ position: 'absolute', bottom: 24, right: 24, width: 56, height: 56, elevation: 4 }}
-        activeOpacity={0.8}
+      {/* Secondary FABs: Add Sale + Restock — positioned above the scan button */}
+      <View
+        style={{
+          position: 'absolute',
+          bottom: 92,
+          right: 20,
+          flexDirection: 'row',
+          gap: 10,
+        }}
       >
-        <Ionicons name="add" size={30} color="white" />
-      </TouchableOpacity>
+        {/* Restock */}
+        <TouchableOpacity
+          onPress={onRestock}
+          style={{
+            width: 48,
+            height: 48,
+            borderRadius: 24,
+            backgroundColor: '#f59e0b',
+            alignItems: 'center',
+            justifyContent: 'center',
+            elevation: 3,
+          }}
+          activeOpacity={0.85}
+          accessibilityRole="button"
+          accessibilityLabel="Restock inventory"
+        >
+          <Ionicons name="cube-outline" size={22} color="white" />
+        </TouchableOpacity>
 
-      <TouchableOpacity
-        onPress={onRestock}
-        className="bg-amber-500 rounded-full items-center justify-center"
-        style={{ position: 'absolute', bottom: 24, right: 92, width: 56, height: 56, elevation: 4 }}
-        activeOpacity={0.8}
-      >
-        <Ionicons name="cube-outline" size={24} color="white" />
-      </TouchableOpacity>
+        {/* Add Sale manually */}
+        <TouchableOpacity
+          onPress={onAddSale}
+          style={{
+            width: 48,
+            height: 48,
+            borderRadius: 24,
+            backgroundColor: '#1e293b',
+            alignItems: 'center',
+            justifyContent: 'center',
+            elevation: 3,
+          }}
+          activeOpacity={0.85}
+          accessibilityRole="button"
+          accessibilityLabel="Add sale manually"
+        >
+          <Ionicons name="add" size={26} color="white" />
+        </TouchableOpacity>
+      </View>
 
+      {/* Primary Scan FAB — full-width pill at the bottom */}
       <TouchableOpacity
         onPress={onScan}
-        className="bg-blue-600 rounded-full items-center justify-center"
-        style={{ position: 'absolute', bottom: 24, right: 160, width: 56, height: 56, elevation: 4 }}
-        activeOpacity={0.8}
+        style={{
+          position: 'absolute',
+          bottom: 24,
+          left: 20,
+          right: 20,
+          height: 56,
+          backgroundColor: '#16a34a',
+          borderRadius: 28,
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'center',
+          elevation: 5,
+          gap: 10,
+        }}
+        activeOpacity={0.85}
+        accessibilityRole="button"
+        accessibilityLabel="Scan fruit to add sale"
       >
-        <Ionicons name="scan-outline" size={24} color="white" />
+        <Ionicons name="scan-outline" size={22} color="white" />
+        <ThemedText size="base" weight="semibold" variant="inverse">Scan & Sell</ThemedText>
       </TouchableOpacity>
     </>
   );
